@@ -19,7 +19,8 @@ namespace Medicos_API.Services
             var doctor = new Doctor
             {
                 Name = request.Name,
-                Age = request.Age,
+                Phone = request.Phone,
+                Email = request.Email,
                 Specialty = request.Specialty,
                 CRM = request.CRM,
                 Adress = new Adress
@@ -74,7 +75,8 @@ namespace Medicos_API.Services
             if (doctor is null) return null;
             
             doctor.Name = request.Name;
-            doctor.Age = request.Age;
+            doctor.Phone = request.Phone;
+            doctor.Email = request.Email;
             doctor.Specialty = request.Specialty;
 
             await _context.SaveChangesAsync();
