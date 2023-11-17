@@ -8,6 +8,7 @@
         public string Email { get; set; }
         public string Specialty { get; set; }
         public string CRM { get; set; }
+        public bool AcceptSample { get; set; }
         public Adress Adress { get; set; }
     }
 }

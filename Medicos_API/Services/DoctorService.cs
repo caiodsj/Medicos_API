@@ -23,6 +23,7 @@ namespace Medicos_API.Services
                 Email = request.Email,
                 Specialty = request.Specialty,
                 CRM = request.CRM,
+                AcceptSample = false,
                 Adress = new Adress
                 {
                     State = adressRequest.State,
