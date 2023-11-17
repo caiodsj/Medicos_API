@@ -38,9 +38,9 @@ namespace Medicos_API.Services
             return doctor;
         }
 
-        public async Task<string> DeleteDoctor(string CRMrequest)
+        public async Task<string> DeleteDoctor(int id)
         {
-            var doctor = await _context.Doctors.FindAsync(CRMrequest);
+            var doctor = await _context.Doctors.FindAsync(id);
             if (doctor is null) return null;
             _context.Remove(doctor);
             await _context.SaveChangesAsync(true);

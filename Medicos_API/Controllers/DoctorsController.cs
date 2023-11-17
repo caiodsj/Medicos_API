@@ -42,11 +42,12 @@ namespace Medicos_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Doctor>> CreateDoctor(DoctorInsertDTO request, AdressInsertDTO adressRequest)
+        public async Task<ActionResult<Doctor>> CreateDoctor([FromBody] DoctorInsertDTO request)
         {
-            var doctor = await _service.CreateDoctor(request, adressRequest);
+            var doctor = await _service.CreateDoctor(request, request.Adress);
             return CreatedAtAction(nameof(GetDoctorByCRM), new { CRM = doctor.CRM }, doctor);
         }
+
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Doctor>> UpdateDoctor(int id, DoctorUpdateDTO request)
@@ -61,10 +62,10 @@ namespace Medicos_API.Controllers
             return Ok(updatedDoctor);
         }
 
-        [HttpDelete("{CRM}")]
-        public async Task<ActionResult<string>> DeleteDoctor(string CRM)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<string>> DeleteDoctor(int id)
         {
-            var result = await _service.DeleteDoctor(CRM);
+            var result = await _service.DeleteDoctor(id);
 
             if (result == null)
             {
