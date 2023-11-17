@@ -27,7 +27,7 @@ namespace Medicos_API.Controllers
                 return NotFound();
             }
 
-            return adress;
+            return Ok(adress);
         }
 
         [HttpPut("{CRM}")]
@@ -40,7 +40,7 @@ namespace Medicos_API.Controllers
                 return NotFound();
             }
 
-            return updatedAdress;
+            return Ok(updatedAdress);
         }
     }
 }

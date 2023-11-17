@@ -17,9 +17,9 @@ namespace Medicos_API.Controllers
             _service = service;
         }
         [HttpGet]
-        public async Task<IEnumerable<Doctor>> GetAllDoctors()
+        public async Task<ActionResult<IEnumerable<Doctor>>> GetAllDoctors()
         {
-            return await _service.GetAllDoctors();
+            return Ok(await _service.GetAllDoctors());
         }
 
         [HttpGet("{CRM}")]
@@ -32,13 +32,13 @@ namespace Medicos_API.Controllers
                 return NotFound();
             }
 
-            return doctor;
+            return Ok(doctor);
         }
 
         [HttpGet("state/{state}")]
-        public async Task<IEnumerable<Doctor>> GetAllDoctorsByState(string state)
+        public async Task<ActionResult<IEnumerable<Doctor>>> GetAllDoctorsByState(string state)
         {
-            return await _service.GetAllDoctorsByState(state);
+            return Ok(await _service.GetAllDoctorsByState(state));
         }
 
         [HttpPost]
@@ -58,7 +58,7 @@ namespace Medicos_API.Controllers
                 return NotFound();
             }
 
-            return updatedDoctor;
+            return Ok(updatedDoctor);
         }
 
         [HttpDelete("{CRM}")]
@@ -71,7 +71,7 @@ namespace Medicos_API.Controllers
                 return NotFound();
             }
 
-            return result;
+            return Ok(result);
         }
     }
 }
