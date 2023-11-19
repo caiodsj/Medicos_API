@@ -14,40 +14,34 @@ namespace Medicos_API.Services
             _context = context;
         }
 
-        public async Task<Doctor> CreateDoctor(DoctorInsertDTO request, AdressInsertDTO adressRequest)
+        public async Task<Doctor> CreateDoctor(DoctorInsertDTO request)
         {
             var doctor = new Doctor
             {
                 Name = request.Name,
                 Phone = request.Phone,
                 Email = request.Email,
+                CPF = request.CPF,
                 Specialty = request.Specialty,
                 CRM = request.CRM,
                 AcceptSample = false,
-                Adress = new Adress
-                {
-                    State = adressRequest.State,
-                    City = adressRequest.City,
-                    Street = adressRequest.Street,
-                    ZipCode = adressRequest.ZipCode,
-                    Neighborhood = adressRequest.Neighborhood,
-                    Number = adressRequest.Number,
-                    Complement = adressRequest.Complement
-                }
+                Adress = new Adress()
             };
             await _context.Doctors.AddAsync(doctor);
             await _context.SaveChangesAsync();
             return doctor;
         }
 
-        public async Task<string> DeleteDoctor(int id)
+        public async Task DeleteDoctor(int id)
         {
             var doctor = await _context.Doctors.FindAsync(id);
-            if (doctor is null) return null;
-            _context.Remove(doctor);
-            await _context.SaveChangesAsync(true);
-            return $"{doctor.Name} excluído com sucesso";
+            if (doctor != null)
+            {
+                _context.Doctors.Remove(doctor);
+                await _context.SaveChangesAsync();
+            }
         }
+
 
         public async Task<IEnumerable<Doctor>> GetAllDoctors()
         {
@@ -78,7 +72,10 @@ namespace Medicos_API.Services
             doctor.Name = request.Name;
             doctor.Phone = request.Phone;
             doctor.Email = request.Email;
+            doctor.CRM = request.CRM;
+            doctor.CPF = request.CPF;
             doctor.Specialty = request.Specialty;
+            doctor.AcceptSample = request.AcceptSample;
 
             await _context.SaveChangesAsync();
             return doctor;

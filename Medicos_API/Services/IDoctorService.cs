@@ -8,8 +8,8 @@ namespace Medicos_API.Services
         Task<IEnumerable<Doctor>> GetAllDoctors();
         Task<Doctor> GetDoctorByCRM(string CRMrequest);
         Task<IEnumerable<Doctor>> GetAllDoctorsByState(string state);
-        Task<Doctor> CreateDoctor(DoctorInsertDTO request, AdressInsertDTO adressRequest);
+        Task<Doctor> CreateDoctor(DoctorInsertDTO request);
         Task<Doctor> UpdateDoctor(int id, DoctorUpdateDTO request);
-        Task<string> DeleteDoctor(int id);
+        Task DeleteDoctor(int id);
     }
 }

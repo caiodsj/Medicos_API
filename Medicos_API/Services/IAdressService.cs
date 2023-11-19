@@ -5,8 +5,8 @@ namespace Medicos_API.Services
 {
     public interface IAdressService
     {
-        Task<Adress> GetAdressByCRM(string CRMrequest);
-        Task<Adress> UpdateAdress(string CRMdoctor, AdressInsertDTO request);
+        Task<Adress> GetAdressByDoctorId(int id);
+        Task<Adress> UpdateAdress(int id, AdressInsertDTO request);
 
     }
 }

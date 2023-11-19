@@ -17,10 +17,10 @@ namespace Medicos_API.Controllers
             _service = service;
         }
 
-        [HttpGet("{CRM}")]
-        public async Task<ActionResult<Adress>> GetAdressByCRM(string CRM)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Adress>> GetAdressByDoctorId(int id)
         {
-            var adress = await _service.GetAdressByCRM(CRM);
+            var adress = await _service.GetAdressByDoctorId(id);
 
             if (adress == null)
             {
@@ -30,10 +30,10 @@ namespace Medicos_API.Controllers
             return Ok(adress);
         }
 
-        [HttpPut("{CRM}")]
-        public async Task<ActionResult<Adress>> UpdateAdress(string CRM, AdressInsertDTO request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Adress>> UpdateAdress(int id, [FromBody]AdressInsertDTO request)
         {
-            var updatedAdress = await _service.UpdateAdress(CRM, request);
+            var updatedAdress = await _service.UpdateAdress(id, request);
 
             if (updatedAdress == null)
             {

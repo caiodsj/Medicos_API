@@ -14,34 +14,33 @@ namespace Medicos_API.Services
             _context = context;
         }
 
-        public async Task<Adress> GetAdressByCRM(string CRMrequest)
+        public async Task<Adress> GetAdressByDoctorId(int id)
         {
             var doctor = await _context.Doctors
             .Include(d => d.Adress)
-            .FirstOrDefaultAsync(d => d.CRM == CRMrequest);
+            .FirstOrDefaultAsync(d => d.Id == id);
 
             return doctor?.Adress;
         }
 
-        public async Task<Adress> UpdateAdress(string CRMdoctor, AdressInsertDTO request)
+        public async Task<Adress> UpdateAdress(int id, AdressInsertDTO request)
         {
-            var doctor = await _context.Doctors
-                .Include(d => d.Adress)
-                .FirstOrDefaultAsync(d => d.CRM == CRMdoctor);
+            var adress = await _context.Adresses
+                .FirstOrDefaultAsync(a => a.Id == id);
 
-            if (doctor is null) return null;
+            if (adress is null) return null;
 
-            doctor.Adress.State = request.State;
-            doctor.Adress.City = request.City;
-            doctor.Adress.Street = request.Street;
-            doctor.Adress.ZipCode = request.ZipCode;
-            doctor.Adress.Neighborhood = request.Neighborhood;
-            doctor.Adress.Number = request.Number;
-            doctor.Adress.Complement = request.Complement;
+            adress.State = request.State;
+            adress.City = request.City;
+            adress.Street = request.Street;
+            adress.ZipCode = request.ZipCode;
+            adress.Neighborhood = request.Neighborhood;
+            adress.Number = request.Number;
+            adress.Complement = request.Complement;
 
             await _context.SaveChangesAsync();
 
-            return doctor.Adress;
+            return adress;
         }
 
 
